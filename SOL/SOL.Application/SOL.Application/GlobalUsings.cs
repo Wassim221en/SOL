@@ -1,0 +1,10 @@
+global using Template.Application.Common.Core.Response;
+global using Template.Application.Common.Core;
+global using Template.Application.Common.Events;
+global using Template.Application.Common;
+global using SOL.Application.Common.Interfaces;
+global using SOL.Application.Common.Errors;
+global using SOL.Application.Common.Core;
+global using SOL.Domain.Events.Employee;
+global using Template.Domain.Exceptions.Http;
+global using Template.Domain.Enums;

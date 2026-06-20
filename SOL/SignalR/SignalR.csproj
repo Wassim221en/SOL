@@ -11,8 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\FPS.Domain\FPS.Domain.csproj" />
-        <ProjectReference Include="..\FPS.Application\FPS.Application.csproj" />
+        <ProjectReference Include="..\SOL.Domain\SOL.Domain\SOL.Domain.csproj" />
+        <ProjectReference Include="..\SOL.Application\SOL.Application\SOL.Application.csproj" />
     </ItemGroup>
 
 </Project>

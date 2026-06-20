@@ -12,12 +12,12 @@
 - **نقطة النهاية**: `/chat-hub`
 
 ### 2. REST API (العمليات الثابتة)
-- **المسار**: `FPS.API/Controllers/ChatController.cs`
+- **المسار**: `SOL.API/Controllers/ChatController.cs`
 - **نقطة النهاية**: `/api/chat`
 
 ### 3. نماذج البيانات
-- **الدردشة**: `FPS.Domain/Entities/Chates/Chat.cs`
-- **الرسالة**: `FPS.Domain/Entities/Chates/Message.cs`
+- **الدردشة**: `SOL.Domain/Entities/Chates/Chat.cs`
+- **الرسالة**: `SOL.Domain/Entities/Chates/Message.cs`
 
 ## SignalR Hub Methods
 

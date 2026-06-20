@@ -44,9 +44,9 @@ Content-Type: application/json
 - استخدم التصدير الدفعي (Batch Export)
 - أضف Progress Bar للـ UI عند تصدير ملفات كبيرة
 
-📌 الملفات المعدلة:
-✓ /FPS.Infrastructe/Services/PdfService.cs
-✓ قيد الاستخدام في CityController → ExportAsPdf
+ 📌 الملفات المعدلة:
+ ✓ /SOL.Infrastructe/Services/QuestPdfService.cs
+ ✓ قيد الاستخدام في CityController → ExportAsPdf
 
-🎯 جاهز للاختبار!
+ 🎯 جاهز للاختبار!
 
