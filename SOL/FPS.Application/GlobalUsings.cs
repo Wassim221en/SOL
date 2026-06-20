@@ -1,0 +1,10 @@
+global using Template.Application.Common.Core.Response;
+global using Template.Application.Common.Core;
+global using Template.Application.Common.Events;
+global using Template.Application.Common;
+global using FPS.Application.Common.Interfaces;
+global using FPS.Application.Common.Errors;
+global using FPS.Application.Common.Core;
+global using FPS.Domain.Events.Employee;
+global using Template.Domain.Exceptions.Http;
+global using Template.Domain.Enums;

@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  fps-api-stage:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fps-api-production
+    restart: unless-stopped
+    networks:
+      - infra_net
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5487
+    volumes:
+      - /srv/wpify/production/store/FpsStore:/app/wwwroot
+
+networks:
+  infra_net:
+    external: true
+
