@@ -21,19 +21,16 @@ public class AuthService<TUser> : IAuthService<TUser>
     private readonly IConfiguration _configuration;
     private readonly IEmailService _emailService;
     private readonly IRepository _repository;
-    private readonly ITokenCacheService _tokenCacheService;
 
     public AuthService(
         UserManager<TUser> userManager,
         IConfiguration configuration,
-        IEmailService emailService, IRepository repository,
-        ITokenCacheService tokenCacheService)
+        IEmailService emailService, IRepository repository)
     {
         _userManager = userManager;
         _configuration = configuration;
         _emailService = emailService;
         _repository = repository;
-        _tokenCacheService = tokenCacheService;
     }
     public async Task<OperationResponse<string>>ForgetPasswordAsync(TUser user)
     {
@@ -182,13 +179,7 @@ public class AuthService<TUser> : IAuthService<TUser>
         );
 
         var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-
-        await _tokenCacheService.SaveAccessTokenAsync(
-            user.Id.ToString(),
-            jti,
-            TimeSpan.FromDays(7),
-            deviceId
-        );
+        
 
         return tokenString;
     }

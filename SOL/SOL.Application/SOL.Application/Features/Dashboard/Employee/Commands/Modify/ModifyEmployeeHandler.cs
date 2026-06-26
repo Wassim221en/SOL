@@ -12,18 +12,15 @@ public class ModifyEmployeeHandler : IRequestHandler<ModifyEmployeeCommand.Reque
     private readonly UserManager<AppUser> _userManager;
     private readonly IRepository _repository;
     private readonly IFileService _fileService;
-    private readonly IEmployeeNamesCache _employeeNamesCache;
 
     public ModifyEmployeeHandler(
         UserManager<AppUser> userManager,
         IRepository repository,
-        IFileService fileService,
-        IEmployeeNamesCache employeeNamesCache)
+        IFileService fileService)
     {
         _userManager = userManager;
         _repository = repository;
         _fileService = fileService;
-        _employeeNamesCache = employeeNamesCache;
     }
 
     public async Task<OperationResponse<GetEmployeeByIdQuery.Response>> Handle(ModifyEmployeeCommand.Request request, CancellationToken cancellationToken)
@@ -108,9 +105,6 @@ public class ModifyEmployeeHandler : IRequestHandler<ModifyEmployeeCommand.Reque
             var errors = string.Join(", ", identityResult.Errors.Select(e => e.Description));
             return new HttpMessage(errors, HttpStatusCode.BadRequest);
         }
-
-        // Ensure cache stays consistent after updates.
-        await _employeeNamesCache.InvalidateAsync(cancellationToken);
 
         var currentRoles = await _userManager.GetRolesAsync(user);
         var rolesToRemove = currentRoles.ToList();

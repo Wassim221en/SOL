@@ -11,20 +11,17 @@ public class ModifyMyProfileCommandHandler : IRequestHandler<ModifyMyProfileComm
     private readonly IRepository _repository;
     private readonly IHttpContextService _httpContextService;
     private readonly IFileService _fileService;
-    private readonly IEmployeeNamesCache _employeeNamesCache;
 
     public ModifyMyProfileCommandHandler(
         UserManager<AppUser> userManager,
         IRepository repository,
         IHttpContextService httpContextService,
-        IFileService fileService,
-        IEmployeeNamesCache employeeNamesCache)
+        IFileService fileService)
     {
         _userManager = userManager;
         _repository = repository;
         _httpContextService = httpContextService;
         _fileService = fileService;
-        _employeeNamesCache = employeeNamesCache;
     }
 
     public async Task<OperationResponse<ModifyMyProfileCommand.Response>> Handle(ModifyMyProfileCommand.Request request, CancellationToken cancellationToken)
@@ -105,8 +102,6 @@ public class ModifyMyProfileCommandHandler : IRequestHandler<ModifyMyProfileComm
             return EmployeeErrors.PasswordChangeFailed(errors);
         }
 
-        // Ensure chat employee directory cache stays consistent after self profile updates (image).
-        await _employeeNamesCache.InvalidateAsync(cancellationToken);
         return new ModifyMyProfileCommand.Response
         {
             Id = employee.Id,

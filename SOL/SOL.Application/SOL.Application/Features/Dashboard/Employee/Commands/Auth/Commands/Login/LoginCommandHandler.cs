@@ -4,6 +4,7 @@ using SOL.Domain.Entities.Security;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Template.Domain.Primitives.Entity.Identity;
 
 namespace Template.Dashboard.Dashboard.Features.Employee.Commands.Auth.Commands.Login;
 
@@ -66,7 +67,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand.Request,Operatio
             return invalidCredentialsError;
         if (!await _userManager.CheckPasswordAsync(employee, request.Password))
             return invalidCredentialsError;
-        if (employee.EmailConfirmed is false && employee.Email is not null)
+        /*if (employee.EmailConfirmed is false && employee.Email is not null)
         {
             var resetToken =  _authService.GenerateResetToken();
             employee.SetResetPasswordToken(_authService.HashToken(resetToken),DateTime.UtcNow.AddHours(1));
@@ -75,7 +76,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand.Request,Operatio
             var emailVerificationEvent=new EmailVerificationIntegrationEvent(employee.Email,resetToken,$"{employee.FirstName} {employee.LastName}");
             await _eventBus.PublishAsync(emailVerificationEvent, cancellationToken);
             return new HttpMessage("البريد الإلكتروني غير مؤكد", HttpStatusCode.BadRequest);
-        }
+        }*/
         var token = await _authService.GenerateAccessToken(employee);
         var refreshToken = await _authService.GenerateRefreshToken(employee.Id,null, cancellationToken);
         if (refreshToken.Success is false)

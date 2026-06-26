@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using SOL.Domain.Entities.Security;
 using Template.API.Authorization;
-using Template.Domain.Primitives.Entity.Identity;
 
 namespace Template.API.Authorization;
 
@@ -30,7 +30,7 @@ public class PermissionsHandler : AuthorizationHandler<PermissionRequirement>
             .Select(c => c.Value)
             .ToList();
 
-        var userPermissions = await _repository.Query<BaseRole>()
+        var userPermissions = await _repository.Query<Role>()
             .Where(r => roles.Contains(r.Name))
             .SelectMany(r => r.RoleClaims.Select(rc => rc.ClaimValue))
             .ToListAsync(CancellationToken.None);

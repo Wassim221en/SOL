@@ -13,20 +13,17 @@ public class AddEmployeeHandler : IRequestHandler<AddEmployeeCommand.Request, Op
     private readonly IRepository _repository;
     private readonly IEventBus _eventBus;
     private readonly IFileService _fileService;
-    private readonly IEmployeeNamesCache _employeeNamesCache;
 
     public AddEmployeeHandler(
         UserManager<AppUser> userManager,
         IRepository repository,
         IEventBus eventBus,
-        IFileService fileService,
-        IEmployeeNamesCache employeeNamesCache)
+        IFileService fileService)
     {
         _userManager = userManager;
         _repository = repository;
         _eventBus = eventBus;
         _fileService = fileService;
-        _employeeNamesCache = employeeNamesCache;
     }
 
     public async Task<OperationResponse<GetAllEmployeesQuery.Response.EmployeeRes>> Handle(AddEmployeeCommand.Request request, CancellationToken cancellationToken)
@@ -91,9 +88,6 @@ public class AddEmployeeHandler : IRequestHandler<AddEmployeeCommand.Request, Op
                 await _fileService.DeleteAsync(thumbnailUrl);
             return new HttpMessage(errors, HttpStatusCode.BadRequest);
         }
-
-        // Ensure cache stays consistent after inserts.
-        await _employeeNamesCache.InvalidateAsync(cancellationToken);
 
         if (request.RoleIds.Any())
         {

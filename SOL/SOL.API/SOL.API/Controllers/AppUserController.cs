@@ -92,7 +92,7 @@ public class AppUserController : ControllerBase
 
 
     [HttpGet]
-    [HasPermissions(PermissionOperator.Or,Permissions.Employees.View,Permissions.HR.View)]
+    //[HasPermissions(PermissionOperator.Or,Permissions.Employees.View,Permissions.HR.View)]
     [ProducesResponseType(typeof(OperationResponse<GetAllEmployeesQuery.Response>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAll(
@@ -111,7 +111,7 @@ public class AppUserController : ControllerBase
 
 
     [HttpGet]
-    [HasPermissions(Permissions.Employees.View)]
+   // [HasPermissions(Permissions.Employees.View)]
     [ProducesResponseType(typeof(OperationResponse<GetEmployeeByIdQuery.Response>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(
@@ -121,7 +121,7 @@ public class AppUserController : ControllerBase
 
 
     [HttpPost]
-    [HasPermissions(Permissions.Employees.Create)]
+    //[HasPermissions(Permissions.Employees.Create)]
     [ProducesResponseType(typeof(OperationResponse<GetAllEmployeesQuery.Response.EmployeeRes>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Add(
@@ -132,7 +132,7 @@ public class AppUserController : ControllerBase
 
 
     [HttpPost]
-    [HasPermissions(PermissionOperator.Or,Permissions.Employees.Update,Permissions.Employees.Create)]
+    //[HasPermissions(PermissionOperator.Or,Permissions.Employees.Update,Permissions.Employees.Create)]
     [ProducesResponseType(typeof(OperationResponse<GetEmployeeByIdQuery.Response>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Modify(
@@ -143,7 +143,7 @@ public class AppUserController : ControllerBase
 
 
     [HttpDelete]
-    [HasPermissions(Permissions.Employees.Delete)]
+    //[HasPermissions(Permissions.Employees.Delete)]
     [ProducesResponseType(typeof(OperationResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(
@@ -170,7 +170,7 @@ public class AppUserController : ControllerBase
         => (await handler.Handle(request, CancellationToken.None)).ToActionResult();
 
     [HttpPost]
-    [HasPermissions(Permissions.Employees.View)]
+    //[HasPermissions(Permissions.Employees.View)]
     [ProducesResponseType(typeof(FileStreamResult), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetEmployeesAsPdf(

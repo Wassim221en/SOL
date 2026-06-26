@@ -1,4 +1,3 @@
-using EFCoreSecondLevelCacheInterceptor;
 using SOL.Domain.Entities.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +20,6 @@ public class GetAllEmployeeNamesHandler : IRequestHandler<GetAllEmployeeNamesQue
         var employees = await query
             .OrderBy(e => e.FirstName + " " + e.LastName)
             .Select(GetAllEmployeeNamesQuery.Response.Selector())
-            .Cacheable()
             .ToListAsync(cancellationToken);
 
         return employees;

@@ -35,7 +35,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddDbContext<TemplateDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<User, BaseRole>(options =>
+builder.Services.AddIdentity<AppUser, Role>(options =>
 {
     options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;

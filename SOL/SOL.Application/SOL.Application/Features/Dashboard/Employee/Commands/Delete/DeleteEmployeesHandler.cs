@@ -7,16 +7,13 @@ namespace SOL.Dashboard.Dashboard.Features.Employee.Commands.Delete;
 public class DeleteEmployeesHandler : IRequestHandler<DeleteEmployeesCommand.Request, OperationResponse>
 {
     private readonly IRepository _repository;
-    private readonly IEmployeeNamesCache _employeeNamesCache;
     private readonly ITokenCacheService _tokenCacheService;
 
     public DeleteEmployeesHandler(
         IRepository repository,
-        IEmployeeNamesCache employeeNamesCache,
         ITokenCacheService tokenCacheService)
     {
         _repository = repository;
-        _employeeNamesCache = employeeNamesCache;
         _tokenCacheService = tokenCacheService;
     }
 
@@ -39,9 +36,6 @@ public class DeleteEmployeesHandler : IRequestHandler<DeleteEmployeesCommand.Req
 
         await Task.WhenAll(employees.Select(employee =>
             _tokenCacheService.InvalidateAllUserTokensAsync(employee.Id.ToString())));
-
-        // Ensure chat employee directory cache stays consistent after deletes.
-        await _employeeNamesCache.InvalidateAsync(cancellationToken);
 
         return OperationResponse.Ok();
     }

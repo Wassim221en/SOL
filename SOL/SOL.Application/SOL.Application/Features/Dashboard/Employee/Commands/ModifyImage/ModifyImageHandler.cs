@@ -9,16 +9,13 @@ public class ModifyImageHandler
 {
     private readonly IRepository _repository;
     private readonly IFileService _fileService;
-    private readonly IEmployeeNamesCache _employeeNamesCache;
 
     public ModifyImageHandler(
         IRepository repository,
-        IFileService fileService,
-        IEmployeeNamesCache employeeNamesCache)
+        IFileService fileService)
     {
         _repository = repository;
         _fileService = fileService;
-        _employeeNamesCache = employeeNamesCache;
     }
 
     public async Task<OperationResponse<ModifyImageCommand.Response>> Handle(
@@ -62,9 +59,6 @@ public class ModifyImageHandler
 
         _repository.Update(employee);
         await _repository.SaveChangesAsync(cancellationToken);
-
-        // Ensure chat employee directory cache stays consistent after image changes.
-        await _employeeNamesCache.InvalidateAsync(cancellationToken);
 
         return OperationResponse<ModifyImageCommand.Response>.Ok(
             new ModifyImageCommand.Response

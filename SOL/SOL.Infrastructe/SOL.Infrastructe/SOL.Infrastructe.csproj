@@ -9,8 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="5.3.9" />
-        <PackageReference Include="EFCoreSecondLevelCacheInterceptor.MemoryCache" Version="5.3.9" />
         <PackageReference Include="FirebaseAdmin" Version="3.4.0" />
         <PackageReference Include="Google.Apis.Drive.v3" Version="1.74.0.4135" />
         <PackageReference Include="MailKit" Version="4.14.1" />
@@ -54,5 +52,4 @@
     </ItemGroup>
 
 </Project>
-
 
